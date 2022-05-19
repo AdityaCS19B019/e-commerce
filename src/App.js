@@ -10,11 +10,13 @@ import Product_listing from './pages/products'
 function App() {
   return (
     <div>
-    {/* <Nav_bar/> */}
-    {/* <Product_page/> */}
-    <Product_listing/>
+    <Nav_bar/>
+    
     <Route path="/cart"><Cart_page/></Route>
     <Route path="/login"><Land_page/></Route>
+    <Route path="/category/:categoryname"><Product_listing/></Route>
+    <Route path={"/product/:pid"}><Product_page/></Route>
+    <Route path={"/home"}><Land_page/></Route>
     </div>
   );
 }

@@ -35,9 +35,12 @@ const useStyles = makeStyles({
 const ProductCard = () => {
     
     const classes = useStyles();
-
+    const Product_click_Handler = () => {
+        window.location = "/product/:pid"
+      }
+  
     return(
-        <div className={classes.card}>
+        <div className={classes.card} onClick = {Product_click_Handler}>
             <Paper variant="outlined" sx={{ maxWidth: 250, m:1}}>
                 <img  className={classes.thumb} src="https://rukminim2.flixcart.com/image/800/960/ku79vgw0/watch/a/g/j/ch2601-fossil-men-original-imaff62hurpdhhha.jpeg?q=50" alt="Watch"/>
                 <Typography component="div">

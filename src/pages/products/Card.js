@@ -28,9 +28,9 @@ const useStyles = makeStyles({
 const Product_Card = () => {
   
     const classes = useStyles();
-
+    
   return (
-    <Card className={classes.card}>
+    <Card className={classes.card} onClick = {Product_click_Handler}>
       <CardContent>
         <Typography gutterBottom variant="h5" component="h2">
           Default
