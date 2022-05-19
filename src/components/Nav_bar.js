@@ -27,11 +27,9 @@ export default function Nav_bar() {
     return (
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top w-500">
 
-
             <div class="container-fluid">
                 <div class="d-flex flex-row bd-highlight mb-3 justify-content-center">
                     <div className='brand_logo'>
-
                         <a class="navbar-brand" onClick={on_logo_click}>ShopEasy</a>
                     </div>
 
