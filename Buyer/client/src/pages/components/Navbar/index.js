@@ -114,9 +114,6 @@ export default function NavBar(props)
   const { pathname } = useLocation();
 
   useEffect(() => {
-    if (localStorage.getItem("authToken")) {
-      history.push("/");
-    }
 
   if("/search"=== pathname)
     setSearch(query.get("q"))
