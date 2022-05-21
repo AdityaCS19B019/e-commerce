@@ -1,0 +1,22 @@
+.box{
+    height: 100px;
+    width: 270px;
+    text-align: center;
+    border: 1px solid grey;
+    border-radius: 10px;
+}
+
+.fa-solid{
+    margin-right: 10px;
+}
+
+.d-flex{
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#box_1 :hover{
+    transform: scale(1.1);
+    
+}
