@@ -9,36 +9,48 @@ import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
-import { useTheme, useMediaQuery, Menu, MenuItem , Link, Stack} from '@mui/material';
+import { useTheme, useMediaQuery, Menu, MenuItem , Link, Stack, IconButton} from '@mui/material';
 import Textfield from '../../../utils/Textfield';
 import CssBaseline from '@mui/material/CssBaseline';
-
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import CloseIcon from '@mui/icons-material/Close';
 import Logo from './logo.png';
 import { alpha, styled } from '@mui/material/styles';
-
-import Alert from '@mui/material/Alert';
-import Collapse from '@mui/material/Collapse';
-
-
-
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation} from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
-
+import SearchIcon from '@mui/icons-material/Search';
+import InputBase from '@mui/material/InputBase';
 //-----------------------------------------------------------------------------
+
+const Search = styled('div')(({ theme }) => ({
+  position: 'relative',
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.warning.dark, 0.15),
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.warning.dark, 0.25),
+  },
+  marginLeft: 0,
+  width: '100%',
+  [theme.breakpoints.up('sm')]: {
+    marginLeft: theme.spacing(1),
+    width: 'auto',
+  },
+}));
+
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: 'inherit',
+  '& .MuiInputBase-input': {
+    padding: theme.spacing(1, 1, 1, 0),
+    paddingLeft: `calc(1em + ${theme.spacing(1)})`,
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: '35ch'
+    },
+  },
+}));
 
 // Adding style components - buttons
 
@@ -68,6 +80,12 @@ const StyledSubmitButton = styled(Button)({
 
 const phoneRegExp=/^[7-9][0-9]{9}$/
 
+function useQuery() {
+  const { search } = useLocation();
+  return React.useMemo(() => new URLSearchParams(search), [search]);
+}
+
+
 export default function NavBar(props) 
 {
 
@@ -75,13 +93,34 @@ export default function NavBar(props)
   const cid = props.cid;
 
   const [error, setError] = React.useState("");
+  const [search, setSearch] = React.useState("");
+  const onChange = (event) => {
+    setSearch(event.target.value);
+    // console.log(event.target.value);
+  };
+
+
 
 
   let history = useHistory();
+
+  const handleSearch= (props) => {
+    window.location = `/search?q=${search}`;
+    console.log(search)
+
+  }
+
+  let query = useQuery();
+  const { pathname } = useLocation();
+
   useEffect(() => {
     if (localStorage.getItem("authToken")) {
       history.push("/");
     }
+
+  if("/search"=== pathname)
+    setSearch(query.get("q"))
+    
   }, [history]);
   
 
@@ -99,12 +138,35 @@ export default function NavBar(props)
               <img style = {{ width :32, height :32, margin : 4}} alt = "logo" src = {Logo} />
             </Link>
           
-            <Box sx={{ flexGrow: 1 , pt : 1 }}>
+            <Box sx={{ 
+              flexGrow: 1 , 
+              pt : 1 ,
+              display: 'flex',
+              alignItems: 'left',
+              width: 'fit-content',
+              edge: 'left'
+            }}>
               <Title as={Link}underline="none" href="/buy" variant="h5" >
            
                   ShopEasy
             
               </Title>
+
+              <Search>
+
+                <StyledInputBase
+                  placeholder="Search for products, brands and more ..."
+                  value={search}
+                  onChange = {onChange}
+                  inputProps={{ 'aria-label': 'search' }}
+                />
+
+                
+              <IconButton onClick = {handleSearch}>
+                    <SearchIcon  />
+                  </IconButton>
+                  
+              </Search>
             </Box>
 
 
