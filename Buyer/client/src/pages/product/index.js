@@ -7,12 +7,19 @@ import StarIcon from '@mui/icons-material/Star';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import BoltIcon from '@mui/icons-material/Bolt';
 import axios from "axios";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+
 
 
 
 const CartButton = styled(Button)(({ theme }) => ({
     
     backgroundColor: '#ff9f00',
+    color : '#fff',
     '&:hover': {
       backgroundColor: '#ffa40d',
     },
@@ -33,6 +40,19 @@ const Product = ({history, match}) => {
     const [fetching, setFetching] = React.useState(true);
     const [src, setSRC] = React.useState([]);
     const [productDetails, setProductDetails] = React.useState([]);
+
+    const [flag, setFlag] = React.useState(false);
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = () => {
+      setOpen(false);
+      window.location = "/cart"
+    };
 
     React.useEffect(async () => {
 
@@ -116,6 +136,24 @@ const Product = ({history, match}) => {
                 let cid = data.cid;
                 let pid = match.params.productID
                 console.log(cid, pid);
+                let qty = 1;
+
+                try{
+
+                    const { data } = await axios.post("/api/cart/addToCart", {cid,pid,qty}, config);
+                    if(data.success){
+                        console.log("success");
+                        setFlag(true);
+                    }
+                    else{
+                        console.log("failure")
+                    }
+
+                }
+                catch (error) 
+                {
+                    console.log(error);
+                }
 
                 
 
@@ -286,6 +324,25 @@ const Product = ({history, match}) => {
                     </Grid>
                 </Grid>
             </Container>
+            <Dialog
+        open={flag}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Success"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+             Product added to cart
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <CartButton onClick={handleClose}>Go to Cart</CartButton>
+
+        </DialogActions>
+      </Dialog>
         </>
         
         }

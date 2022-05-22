@@ -33,7 +33,7 @@ exports.search = (req ,res , next) => {
         function Brands(item, index)
         {
             console.log(item);
-            sql += "brand = '" + item + "' " + "or " 
+            sql += "brand = '" + item + "' " + "and " 
         }
 
 
@@ -45,7 +45,7 @@ exports.search = (req ,res , next) => {
             }
             sql += " and (  "      
             b.forEach(Brands);
-            sql = sql.slice(0, -3)
+            sql = sql.slice(0, -4)
 
             sql += ")"      
 
@@ -56,7 +56,7 @@ exports.search = (req ,res , next) => {
         function Categories(item, index)
         {
             console.log(item);
-            sql += "category  = '" + item + "' " + "or " 
+            sql += "category  = '" + item + "' " + "and " 
 
         }
         
@@ -70,7 +70,7 @@ exports.search = (req ,res , next) => {
 
             sql += " and (  "      
             c.forEach(Categories);
-            sql = sql.slice(0, -3)
+            sql = sql.slice(0, -4)
 
             sql += ")"  
 

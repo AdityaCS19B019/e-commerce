@@ -5,12 +5,14 @@ import { useLocation } from 'react-router-dom';
 import axios from "axios";
 import NavBar from '../components/Navbar';
 import routes from "./routes"
+import { LinearProgress } from '@mui/material';
 
 
 const Home = ({history}) => {
 
   const [cid, setcid] = React.useState(0);
   const [data, setData] = React.useState({});
+  const [fetching, setFetching] = React.useState(true)
   const fetchPrivateData = async () =>  {
 
     if(localStorage.getItem("authToken")){
@@ -31,9 +33,13 @@ const Home = ({history}) => {
           if(data.success){
             setcid(data.cid);
             setData(data);
+          setFetching(false)
+
           }
           else{ 
             setcid(0)
+          setFetching(false)
+
           }
         } 
         catch (error) 
@@ -41,11 +47,13 @@ const Home = ({history}) => {
           setcid(0)
           localStorage.removeItem("authToken");
           history.push("/");
+          setFetching(false)
         }
   
       }
       else{
         setcid(0)
+        setFetching(false)
 
       }
   
@@ -54,6 +62,8 @@ const Home = ({history}) => {
     if(!localStorage.getItem("authToken"))
     {
       setcid(0);
+      setFetching(false)
+
     }
     else{
       fetchPrivateData();
@@ -62,7 +72,10 @@ const Home = ({history}) => {
 
   return (
     <>
-      <NavBar cid = {cid}  data = {data}/>
+      {fetching ? <LinearProgress/> :
+      
+      <>
+              <NavBar cid = {cid}  data = {data}/>
       {/* <div>Home with cid = {cid}</div> */}
       <Switch>
         {routes.map(({component : Cmp, ...route}, key) => {
@@ -70,11 +83,14 @@ const Home = ({history}) => {
             <Route
               {...route}
               key = {key}
-              render = {props => <Cmp {...props} data = {data} />}
+              render = {props => <Cmp {...props} cid = {cid} data = {data} />}
             />
           )
         })}
       </Switch>
+      
+      </>
+      }
     </>
 
   )

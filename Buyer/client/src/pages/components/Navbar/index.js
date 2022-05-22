@@ -21,6 +21,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
+import AccountCircle from '@mui/icons-material/AccountCircle';
 //-----------------------------------------------------------------------------
 
 const Search = styled('div')(({ theme }) => ({
@@ -85,12 +86,30 @@ function useQuery() {
   return React.useMemo(() => new URLSearchParams(search), [search]);
 }
 
+const settings = ['Profile', 'Account', 'Logout'];
 
 export default function NavBar(props) 
 {
 
   const data = props.data;
   const cid = props.cid;
+
+  const [auth, setAuth] = React.useState(true);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleChange = (event) => {
+    setAuth(event.target.checked);
+  };
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+
 
   const [error, setError] = React.useState("");
   const [search, setSearch] = React.useState("");
@@ -112,6 +131,7 @@ export default function NavBar(props)
 
   let query = useQuery();
   const { pathname } = useLocation();
+
 
   useEffect(() => {
 
@@ -178,9 +198,39 @@ export default function NavBar(props)
                
                {cid ? <>
                
-                <Button color="primary" onClick={() => {localStorage.removeItem("authToken"); history.push("/")}}>
-                    Logout
-                  </Button>
+
+                  <div>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={() => {history.push("/profile"); handleClose() }}>Profile</MenuItem>
+                <MenuItem onClick={() => {history.push("/account"); handleClose()}}>Account</MenuItem>
+                <MenuItem onClick={() => {history.push("/cart"); handleClose()}}>Cart</MenuItem>
+                <MenuItem onClick={() => {localStorage.removeItem("authToken"); history.push("/")}}>Logout</MenuItem>
+              </Menu>
+            </div>
                
                </>
                

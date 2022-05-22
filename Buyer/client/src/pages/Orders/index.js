@@ -11,7 +11,7 @@ const Orders = () => {
           <Link to={"../account"}>Your Account</Link>
         </div>
         <div>
-          >
+          
         </div>
         <div class="second_head">
           Your Orders
