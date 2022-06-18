@@ -379,7 +379,7 @@ const PlaceOrder = (props) => {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Your Order has been placed successfully. Balance : {5000-total}
+            Your Order has failed to place as there is no enough balance.<br/> Balance : {5000}
           </DialogContentText>
         </DialogContent>
         <DialogActions>

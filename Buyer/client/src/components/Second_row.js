@@ -4,13 +4,20 @@ import './Second_row.css'
 import { Link } from 'react-router-dom'
 
 export default function Second_row() {
+
+const Click_fashion = () => {
+    window.location = "./search?q=fashion"
+}
+
+const Click_grocery = () => {
+    window.location = "./search?q=grocery"
+}
+
     return (
         <>
             <div className='second_row'>
                 <div class="d-flex flex-row bd-highlight mb-3 justify-content-center">
-                    <Link to={"/Top_offers"}>
-                        
-                    </Link>
+                    
                     <Category_row
                         image="https://rukminim1.flixcart.com/flap/128/128/image/f15c02bfeb02d15d.png?q=100"
                         caption="Top Offers"

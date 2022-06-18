@@ -20,7 +20,7 @@ const Wallet = () => {
                 <div class="header_1">
                     <div class="d-flex flex-row mb-3 justify-content-between">
                         <div><h5>Wallet Balance</h5></div>
-                        <div><h6>Rs 1050</h6></div>
+                        <div><h6>Rs 5000</h6></div>
                     </div>
                     <hr></hr>
                 </div>

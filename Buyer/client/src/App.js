@@ -8,6 +8,10 @@ import Product_listing from './pages/products'
 import Home from './pages/home';
 import Login from './pages/login';
 import Register from './pages/register';
+import Account from './pages/account';
+import Profile from './pages/profile';
+import Wallet from './pages/Wallet';
+
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 function App() {
@@ -18,8 +22,12 @@ function App() {
       <Switch>
               <Route  path= "/login" component = {Login}/>
               <Route  path= "/register" component = {Register}/>
+              <Route path = "/account" component={Account}/>
+              <Route path="/wallet" component={Wallet}/>
+              <Route path="/profile" component={Profile}/>
+              <Route path="/buy" component={Home}/>
               <Route  path = "/" component = {Home}/>
-
+              
       </Switch>
 
     </Router>

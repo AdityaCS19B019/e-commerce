@@ -27,15 +27,15 @@ const Profile = () => {
         </div>
         <div class="d-flex flex-column  mb-3">
           <div><h5>Last Name</h5></div>
-          <div class='field'><h6>Aditya</h6></div>
+          <div class='field'><h6>Immaneni</h6></div>
         </div>
         <div class="d-flex flex-column  mb-3">
           <div><h5>Email</h5></div>
-          <div class='field'><h6>Aditya</h6></div>
+          <div class='field'><h6>cs19b019@iittp.ac.in</h6></div>
         </div>
         <div class="d-flex flex-column  mb-3">
           <div><h5>Mobile No</h5></div>
-          <div class='field'><h6>Aditya</h6></div>
+          <div class='field'><h6>9505937189</h6></div>
         </div>
       </div>
     </div>

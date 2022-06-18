@@ -1,30 +1,34 @@
 import React from 'react'
 import './index.css'
+import { Link } from 'react-router-dom'
 
-const Profile = () => {
+const Account = () => {
 
     const OnOrders_click = () => {
-      window.location = "./account/orders"
+      window.location = "./orders"
     }
     const OnProfile_click = () => {
-      window.location = "./account/profile"
+      window.location = "./profile"
     }
     const OnAddress_click = () => {
 
     }
     const OnWallet_click = () => {
-
+     window.location = "./wallet"
     }
     const OnCards_click = () => {
 
     }
     return (
         <div>
+            <div><Link to={".."}>Home</Link></div>
             <div class="d-flex flex-column bd-highlight mb-3">
             <div class="d-flex flex-row bd-highlight mb-3 justify-content-center">
                 <div class="Name">
                     <h3>Your Account</h3>
+                    
                 </div>
+                
             </div>
                 <div class="d-flex flex-row bd-highlight mb-3 justify-content-center">
                     <div className='box' >
@@ -90,4 +94,4 @@ const Profile = () => {
     )
 }
 
-export default Profile
+export default Account
